@@ -1,30 +1,65 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+//vuetify提供的定位功能，回到上一个路由的时候可以定位到之前的位置
+import goTo from 'vuetify/es5/services/goto'
+import Layout from '../views/Layout.vue'
+import Index from '../views/Index.vue'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home
+    path: '/',
+    name: 'Layout',
+    component: Layout,
+    redirect: '/index',
+    children: [
+      {
+        path: 'index',
+        name: 'Index',
+        component: Index
+      },
+      {
+        path: '/news',
+        name: 'News',
+        component: () => import('../views/News.vue')
+      },
+      {
+        path: '/message',
+        name: 'Message',
+        component: () => import('../views/Message.vue')
+      },
+      {
+        path: '/my',
+        name: 'My',
+        component: () => import('../views/My.vue')
+      }
+    ]
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/404',
+    name: 'Page404',
+    component: () => import('../views/Page404.vue')
   }
-];
+]
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes
-});
+  scrollBehavior: (to, from, savedPosition) => {
+    let scrollTo = 0
 
-export default router;
+    if (to.hash) {
+      scrollTo = to.hash
+    } else if (savedPosition) {
+      scrollTo = savedPosition.y
+    }
+    return goTo(scrollTo)
+  },
+  routes
+})
+
+export default router
