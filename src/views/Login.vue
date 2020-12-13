@@ -1,6 +1,6 @@
 <template>
   <div class="bg row">
-    <v-form ref="form" v-model="valid" lazy-validation class="col" style="height:400px">
+    <v-form ref="form" v-model="valid" lazy-validation class="col" style="height:400px" v-if="!flag">
       <v-text-field v-model="phone" :counter="11" :rules="phoneRules" label="Phone" required></v-text-field>
 
       <v-text-field v-model="password" :rules="passRules" label="Password" required></v-text-field>
@@ -29,6 +29,23 @@
         重置
       </v-btn>
     </v-form>
+    <v-dialog v-model="flag"  max-width="500" v-else>
+      <v-card>
+        <v-card-title>
+          <v-img height="250" src="http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/picture/2.jpg"></v-img>
+          <v-card-text>
+            进入我的博客
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-apacer></v-apacer>
+            <v-btn color="primary" text @click="goIndex">
+              I accept
+            </v-btn>
+          </v-card-actions>
+        </v-card-title>
+      </v-card>
+    </v-dialog>
 
     <v-overlay absolute z-index="5" class="mask"></v-overlay>
   </div>
@@ -66,6 +83,10 @@ export default {
         img.src = url
       })
     },
+    goIndex() {
+      this.flag = !this.flag
+      this.$router.push('/')
+    },
     submit() {
       this.axios({
         method: 'POST',
@@ -78,9 +99,8 @@ export default {
       }).then((res) => {
         if (res.data.code === 1) {
           this.flag = !this.flag
-          alert('登陆成功')
+          /* alert('登陆成功') */
           this.$store.commit('login', res.data.data)
-          this.$router.push('/')
         }else{
           console.log(res.data)
           alert('登陆失败')
@@ -95,7 +115,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+
   .col {
     flex: 0 0 40%;
     background-color: #eee;
@@ -104,7 +124,7 @@ export default {
     height: 80px;
     line-height: 80px;
   }
-
+}
 .bg {
   width: 100%;
   height: 100vh;
