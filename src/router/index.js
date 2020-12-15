@@ -9,35 +9,54 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/index',
+    name: 'Index',
+    component: Index
+  },
+  {
     path: '/',
-    name: 'Layout',
     component: Layout,
-    redirect: '/index',
+    redirectTo: '/tags',
     children: [
       {
-        path: 'index',
-        name: 'Index',
-        component: Index
-      },
-      {
-        path: '/news',
+        path: 'news',
         name: 'News',
         component: () => import('../views/News.vue')
       },
       {
-        path: '/message',
+        path: 'message',
         name: 'Message',
         component: () => import('../views/Message.vue')
       },
       {
-        path: '/my',
+        path: 'category',
+        name: 'Category',
+        component: () => import('../views/Category.vue')
+      },
+      {
+        path: 'achieve',
+        name: 'Achieve',
+        component: () => import('../views/Achieve.vue')
+      },
+      {
+        path: 'tag',
+        name: 'Tag',
+        component: () => import('../views/Tag.vue')
+      },
+      {
+        path: 'friend',
+        name: 'Friend',
+        component: () => import('../views/Friend.vue')
+      },
+      {
+        path: 'my',
         name: 'My',
         component: () => import('../views/My.vue'),
         redirect: '/my/userinfo',
         children: [
           {
             path: 'userinfo',
-            path: 'UserInfo',
+            name: 'UserInfo',
             component: () => import('../views/UserInfo.vue')
           },
           {
