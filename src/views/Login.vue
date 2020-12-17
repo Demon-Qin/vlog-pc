@@ -29,16 +29,19 @@
         重置
       </v-btn>
     </v-form>
-    <v-dialog v-model="flag"  max-width="500" v-else>
+    <v-dialog v-model="flag" max-width="500" v-else>
       <v-card>
         <v-card-title>
-          <v-img height="250" src="http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/picture/2.jpg"></v-img>
+          <v-img
+            height="250"
+            src="http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/picture/2.jpg"
+          ></v-img>
           <v-card-text>
             进入我的博客
           </v-card-text>
           <v-divider></v-divider>
           <v-card-actions>
-            <v-apacer></v-apacer>
+            <v-spacer></v-spacer>
             <v-btn color="primary" text @click="goIndex">
               I accept
             </v-btn>
@@ -62,7 +65,7 @@ export default {
     passRules: [(v) => !!v || '密码不能为空', (v) => (v && v.length <= 11) || '密码必须为大于6小于10'],
     emailRules: [(v) => !!v || '密码不能为空', (v) => (v.length >= 6 && v.length <= 10) || '密码必须在6到10位之间'],
     checkbox: false,
-    verifyCode:''
+    verifyCode: ''
   }),
   created() {
     //页面创建，即请求获得验证码去填充图片标签
@@ -101,7 +104,7 @@ export default {
           this.flag = !this.flag
           /* alert('登陆成功') */
           this.$store.commit('login', res.data.data)
-        }else{
+        } else {
           console.log(res.data)
           alert('登陆失败')
         }

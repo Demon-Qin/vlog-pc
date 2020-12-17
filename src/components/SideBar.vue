@@ -6,14 +6,12 @@
         <v-icon large>mdi-camera</v-icon>
       </v-btn>
 
-
-      <c-card-title class="white--text">
+      <v-card-title class="white--text">
         <div class="display-1">
           {{ user.nickname }}
         </div>
-      </c-card-title>
+      </v-card-title>
     </v-img>
-
 
     <v-row class="mt-4">
       <v-btn class="mx-2" fab dark color="cyan" @click="uploadAvatar">
@@ -21,25 +19,21 @@
       </v-btn>
     </v-row>
 
-
     <v-list two-line>
       <v-list-item>
         <v-list-item-icon>
           <v-icon color="indigo">mdi-phone</v-icon>
         </v-list-item-icon>
 
-
         <v-list-item-content>
           <v-list-item-title>{{ user.phone }}</v-list-item-title>
           <v-list-item-subtitle>{{ genderTxt }}</v-list-item-subtitle>
         </v-list-item-content>
 
-
         <v-list-item-icon>
           <v-icon>mdi-message-text</v-icon>
         </v-list-item-icon>
       </v-list-item>
-
 
       <v-list-item>
         <v-list-item-icon>
@@ -52,72 +46,59 @@
         </v-list-item-content>
       </v-list-item>
 
-
       <v-list-item>
         <v-list-item-icon>
           <v-icon color="indigo">mdi-map-marker</v-icon>
         </v-list-item-icon>
-
 
         <v-list-item-content>
           <v-list-item-title>{{ user.address }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
-
       <v-divider inset></v-divider>
-
 
       <v-list-item @click="$router.push('/my/usersafe')">
         <v-list-item-icon>
-        <v-icon color="indigo">mdi-account</v-icon>
+          <v-icon color="indigo">mdi-account</v-icon>
         </v-list-item-icon>
-
 
         <v-list-item-content>
           <v-list-item-title>账户安全</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
-
       <v-divider insert></v-divider>
-
 
       <v-list-item @click="$router.push('/my/feedback')">
         <v-list-item-icon>
           <v-icon color="indigo">mdi-email</v-icon>
         </v-list-item-icon>
 
-
         <v-list-item-content>
           <v-list-item-title>意见反馈</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-
 
       <v-list-item @click="$router.push('/my/about')">
         <v-list-item-icon>
           <v-icon color="indigo">mdi-home</v-icon>
         </v-list-item-icon>
 
-
-
         <v-list-item-content>
           <v-list-item-title>关于社区</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-
 
       <v-divider inset></v-divider>
     </v-list>
   </v-card>
 </template>
 
-
 <script>
 import { mapState } from 'vuex'
 export default {
-  data: ()  => ({
+  data: () => ({
     imgSrc: '',
     elInput: null,
     file: '',
@@ -219,15 +200,12 @@ export default {
 }
 </script>
 
-
 <style lang="scss">
 a:link {
   text-decoration: none;
 }
 
-
 * {
   font-size: 16px;
 }
-
 </style>
