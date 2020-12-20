@@ -28,7 +28,7 @@
                 <h4 class="light-grey--text my-6 pt-6">{{ article.category }}</h4>
                 <h1 class="mt-6 mask pa-6">{{ article.title }}</h1>
                 <div class="text-md-h6 light-grey--text pa-2 mask display">{{ article.summary }}</div>
-                <v-btn rounded dark elevation="12" class="mt-6 px-12 py-6 purple-btn">
+                <v-btn rounded dark elevation="12" class="mt-6 px-12 py-6 purple-btn" @click="gotoDetail(article.id)">
                   <h3>阅读更多</h3>
                 </v-btn>
               </v-img>
@@ -38,7 +38,7 @@
       </v-row>
 
       <v-row style="width: 80%;margin: 0 auto;margin-top: 10px;">
-        <v-col cols="12" md="4" v-for="(article, index) in articles" :key="index">
+        <v-col cols="12" md="4" v-for="(article, index) in articles" :key="index" @click="gotoDetail(article.id)">
           <v-hover v-slot="{ hover }">
             <v-card class="rounded-lg" height="550" link :elevation="hover ? 12 : 2" :class="{ 'on-hover': hover }">
               <v-img class="white--text align-end" :src="article.cover" height="55%">
@@ -68,7 +68,7 @@
       </v-row>
       <!-- 分页-->
       <v-row justify="space-around" class="my-6">
-        <v-btn class="mx-2 grey" fab dark large elevation="12" :class="{ bgColor: pageNum > 1 }" @click="previous">
+        <v-btn class="mx-2 grey" fab dark large elevation="12" :class="{ bgColor: pageNum > 1 }" @click="previous(e)">
           <v-icon dark>
             mdi-less-than
           </v-icon>
@@ -105,21 +105,21 @@ export default {
     articles: [], //所有文章数组
     indexList: [], //推荐文章数组
     slides: [
-      {
-        src:'http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/picture/1.jpg'
-      },
-      {
-        src:'http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/picture/10.jpg'
-      },
-      {
-        src:'http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/picture/3.jpg'
-      },
-      {
-        src:'http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/picture/2.jpg'
-      },
-      {
-        src:'http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/picture/5.jpg'
-      },
+      // {
+      //   src:'http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/picture/1.jpg'
+      // },
+      // {
+      //   src:'http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/picture/10.jpg'
+      // },
+      // {
+      //   src:'http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/picture/3.jpg'
+      // },
+      // {
+      //   src:'http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/picture/2.jpg'
+      // },
+      // {
+      //   src:'http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/picture/5.jpg'
+      // },
     ] //轮播图数组
   }),
   components: {
@@ -133,13 +133,26 @@ export default {
     })
   },
   created() {
+    this.getIndexList()
     this.getData()
   },
   methods: {
-    //根据是否有发布日期过滤出推荐文章
-    recommened(element) {
-      return element.publishDate === null
-    },
+   getIndexList() {
+     this.axios({
+       method: 'GET',
+       url: '/article/recommend',
+       headers: {
+         userId: this.user.id
+       }
+     }).then((res) => {
+       console.log(res.data.data)
+       this.indexList = res.data.data
+       this.indexList.forEach((element) => {
+         this.slides.push(element.cover)
+       })
+     })
+   },
+    
     getData() {
       this.axios({
         method: 'POST',
@@ -194,9 +207,16 @@ export default {
           }
         )
       }
+    },
+    gotoDetail(id) {
+      console.log("进入跳转")
+      this.$router.push({
+        path: '/article/' + id
+      })
     }
   }
-}
+  }
+
 </script>
 <style lang="scss" scoped>
 .purple-btn {

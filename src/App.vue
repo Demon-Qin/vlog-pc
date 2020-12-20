@@ -70,7 +70,9 @@ a:link {
   text-decoration: none;
 }
 .bg-color {
-  background-image: linear-gradient(to right, #bf30ac 0%, #0f9d58 100%);
+  background: #be93c5;  /* fallback for old browsers */      
+  background: -webkit-linear-gradient(to right, rgb(190, 147, 197), rgb(123, 198, 204));  /* Chrome 10-25, Safari 5.1-6 */     
+  background: linear-gradient(to right, rgb(190, 147, 197), rgb(123, 198, 204)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */      
   opacity: 0.7;
 }
 </style>

@@ -49,6 +49,11 @@ const routes = [
         component: () => import('../views/Friend.vue')
       },
       {
+        path: 'write',
+        name: 'Write',
+        component: () => import('../views/Write.vue')
+      },
+      {
         path: 'my',
         name: 'My',
         component: () => import('../views/My.vue'),
@@ -77,6 +82,11 @@ const routes = [
         ]
       }
     ]
+  },
+  {
+    path: '/article/:id',
+    name: 'ArticleDetail',
+    component: () => import('../views/ArticleDetail.vue')
   },
   {
     path: '/login',

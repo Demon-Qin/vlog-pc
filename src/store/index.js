@@ -13,7 +13,7 @@ export default new Vuex.Store({
       phone:'18851672790',
       password:'e10adc3949ba59abbe56e057f20f883e',
       nickname:'ZYQin',
-      avatar:'http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/avatar/238e90a8-f874-40af-a5d5-24d8bed99ee3.jpg',
+      avatar:'http://first-bucket20201002.oss-cn-hangzhou.aliyuncs.com/img/img/avatar/me.jpg',
       gender:'0',
     }
   },
